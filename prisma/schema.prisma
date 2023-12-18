@@ -10,4 +10,9 @@ datasource db {
   url = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model Category {
+  id            String @id @default(uuid())
+  name          String
+}
   
