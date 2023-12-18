@@ -18,7 +18,7 @@ Speed is crucial in delivering a seamless experience. IntelliBuddy utilizes the 
 
 Our companion entities are securely stored using MySQL and Prisma. This robust combination ensures data integrity and efficient management of companion profiles.
 
-### Seamless Navigation with Next.js 13 App Router
+### Seamless Navigation with Next.js 14 App Router
 
 The integration of Next.js 14 App Router offers users swift and intuitive client-side routing. This modern approach to navigation enhances user engagement by providing a fluid and responsive interface.
 
@@ -28,7 +28,7 @@ Thanks to Stripe integration, IntelliBuddy offers a straightforward and secure s
 
 ### Secure User Authentication
 
-With Clerk handling user authentication, IntelliBuddy guarantees a secure environment for all users. Our priority is to protect user data while maintaining an easy and flexible sign-in process.
+With a Clerk handling user authentication, IntelliBuddy guarantees a secure environment for all users. Our priority is to protect user data while maintaining an easy and flexible sign-in process.
 
 ## User Experience
 
@@ -36,7 +36,7 @@ IntelliBuddy's user interface is designed with React and Tailwind, ensuring a sl
 
 ## The IntelliBuddy Advantage
 
-What sets IntelliBuddy apart is its commitment to creating a dynamic and intelligent companion that grows and adapts with its user. Whether for daily assistance, learning, or just a friendly chat, IntelliBuddy is designed to be more than just an app – it's a companion for the digital age.
+What sets IntelliBuddy apart is its commitment to creating a dynamic and intelligent companion that grows and adapts with its users. Whether for daily assistance, learning, or just a friendly chat, IntelliBuddy is designed to be more than just an app – it's a companion for the digital age.
 
 ## Join the IntelliBuddy Community
 
