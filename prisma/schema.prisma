@@ -12,7 +12,8 @@ datasource db {
 }
 
 model Category {
-  id            String @id @default(uuid())
-  name          String
+  id    String @id @default(uuid())
+  name  String
 }
+
   
