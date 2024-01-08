@@ -1,5 +1,7 @@
 # IntelliBuddy: Your Advanced AI Companion
 
+![intellibuddy](https://github.com/aphuus/intellibuddy-app/assets/73286833/9df0aa5c-9d15-4f35-9846-420540388921)
+
 ## Overview
 
 IntelliBuddy is an innovative SaaS AI Companion, meticulously crafted using the latest web development technologies. Designed with a focus on user experience and long-term engagement, IntelliBuddy stands as a testament to the power of modern AI integrated within a web application.
