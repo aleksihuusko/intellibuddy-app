@@ -222,7 +222,7 @@ const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
               <FormItem className="col-span-2 md:col-span-1">
                 <FormLabel>Instructions</FormLabel>
                 <FormDescription>
-                  Describe in detail your IntelliBuddy's backstory and all relevant details.
+                  Describe in detail your IntelliBuddy backstory and all relevant details.
                 </FormDescription>
                 <FormControl>
                   <Textarea
