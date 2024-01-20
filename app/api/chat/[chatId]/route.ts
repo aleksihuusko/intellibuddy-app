@@ -90,48 +90,75 @@ export async function POST(request: Request, { params }: { params: { chatId: str
       await model
         .call(
           `
-          ONLY generate plain sentences without prefix of who is speaking. DO NOT use ${companion.name}: prefix. 
-  
+          ONLY generate responses in plain sentences without any ${companion.name} prefixes, line breaks, or additional formatting. Responses should directly and concisely answer the question or statement provided, without any introduction or preamble.
+          Below are relevant details about the conversation's context, including any necessary background information:
+          - instructions start -
           ${companion.instructions}
+          - instructions end -
   
-          Below are relevant details about ${companion.name}'s past and the conversation you are in.
+          Below are relevant details about ${companion.name}'s past and the conversation you are in:
+          - relevant history start -
           ${relevantHistory}
-  
-  
-          ${recentChatHistory}\n${companion.name}:`
+          - relevant history end -
+          - recent chat history start -
+          ${recentChatHistory}\n${companion.name}:
+          - recent chat history end -
+          `
         )
         .catch(console.error)
     );
 
-    const cleaned = resp.replaceAll(',', '');
-    const chunks = cleaned.split('\n');
-    const response = chunks[0];
+    // const cleaned = resp.replaceAll(',', '');
+    // const chunks = cleaned.split('\n');
+    // const response = chunks[0];
 
-    await memoryManager.writeToHistory('' + response.trim(), companionKey);
+    // New parsing logic to extract the relevant response
+    const responseDelimiter = 'User:'; // Define the delimiter
+    const splitResponses = resp.split(responseDelimiter);
+    let response = splitResponses[splitResponses.length - 1].trim(); // Get the last part
+
+    // Additional parsing to dynamically remove the character name
+    const characterName = companion.name + ':'; // Use the companion's name
+    if (response.startsWith(characterName)) {
+      response = response.substring(characterName.length).trim();
+    }
+
+    // Additional step to remove the repeated question
+    const questionEndIndex = response.indexOf('\n');
+    if (questionEndIndex !== -1) {
+      response = response.substring(questionEndIndex + 1).trim();
+    }
+
+    if (response) {
+      // Clean the response if needed
+      response = response.replaceAll('\n', ' ').trim(); // Example: remove line breaks and trim
+
+      await memoryManager.writeToHistory(response, companionKey);
+
+      // Update the chat history in your database
+      if (response.length > 1) {
+        await prismadb.companion.update({
+          where: {
+            id: params.chatId
+          },
+          data: {
+            messages: {
+              create: {
+                content: response,
+                role: 'system',
+                userId: user.id
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // Create a stream for the response
     var Readable = require('stream').Readable;
-
     let s = new Readable();
     s.push(response);
     s.push(null);
-
-    if (response !== undefined && response.length > 1) {
-      memoryManager.writeToHistory('' + response.trim(), companionKey);
-
-      await prismadb.companion.update({
-        where: {
-          id: params.chatId
-        },
-        data: {
-          messages: {
-            create: {
-              content: response.trim(),
-              role: 'system',
-              userId: user.id
-            }
-          }
-        }
-      });
-    }
 
     return new StreamingTextResponse(s);
   } catch (error) {
