@@ -108,10 +108,6 @@ export async function POST(request: Request, { params }: { params: { chatId: str
         .catch(console.error)
     );
 
-    // const cleaned = resp.replaceAll(',', '');
-    // const chunks = cleaned.split('\n');
-    // const response = chunks[0];
-
     // New parsing logic to extract the relevant response
     const responseDelimiter = 'User:'; // Define the delimiter
     const splitResponses = resp.split(responseDelimiter);
