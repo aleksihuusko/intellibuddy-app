@@ -90,12 +90,11 @@ export async function POST(request: Request, { params }: { params: { chatId: str
       await model
         .call(
           `
-          ONLY generate responses in plain sentences without any ${companion.name} prefixes, line breaks, or additional formatting. Responses should directly and concisely answer the question or statement provided, without any introduction or preamble.
+          ONLY generate responses in plain sentences without any ${companion.name} prefixes, line breaks, or additional formatting. Do not include any "Sure thing" or something like that in your responses, only your response. Responses should directly and concisely answer the question or statement provided, without any introduction or preamble.
           Below are relevant details about the conversation's context, including any necessary background information:
           - instructions start -
           ${companion.instructions}
           - instructions end -
-  
           Below are relevant details about ${companion.name}'s past and the conversation you are in:
           - relevant history start -
           ${relevantHistory}
@@ -124,6 +123,10 @@ export async function POST(request: Request, { params }: { params: { chatId: str
     if (questionEndIndex !== -1) {
       response = response.substring(questionEndIndex + 1).trim();
     }
+
+    // Remove any occurrences of "Sure thing!" from the response
+    response = response.replace('Sure thing!', '').trim();
+    response = response.replace('Greetings!', '').trim();
 
     if (response) {
       // Clean the response if needed

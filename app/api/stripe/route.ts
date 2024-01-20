@@ -35,6 +35,7 @@ export async function GET() {
       success_url: settingsUrl,
       cancel_url: settingsUrl,
       payment_method_types: ['card'],
+      mode: 'subscription',
       billing_address_collection: 'auto',
       customer_email: user.emailAddresses[0].emailAddress,
       line_items: [
@@ -60,7 +61,7 @@ export async function GET() {
 
     return new NextResponse(JSON.stringify({ url: stripeSession.url }));
   } catch (error) {
-    console.log('[STRIPE_GET', error);
+    console.log('[STRIPE]', error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
