@@ -1,6 +1,8 @@
 # IntelliBuddy: Your Advanced AI Companion
 
-![intellibuddy](https://github.com/aphuus/intellibuddy-app/assets/73286833/9df0aa5c-9d15-4f35-9846-420540388921)
+![Visit IntelliBuddy App](https://img.shields.io/badge/Visit-IntelliBuddy_App-blue?style=for-the-badge&logo=appveyor)
+
+![intelliBuddy](https://github.com/aphuus/intellibuddy-app/assets/73286833/9df0aa5c-9d15-4f35-9846-420540388921)
 
 ## Overview
 
